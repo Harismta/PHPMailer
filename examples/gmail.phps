@@ -1,108 +1,262 @@
 <?php
-
-/**
- * This example shows settings to use when sending via Google's Gmail servers.
- * This uses traditional id & password authentication - look at the gmail_xoauth.phps
- * example to see how to use XOAUTH2.
- * The IMAP section shows how to save this message to the 'Sent Mail' folder using IMAP commands.
- */
-
-//Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
-//Create a new PHPMailer instance
-$mail = new PHPMailer();
+$mail = new PHPMailer(true);
 
-//Tell PHPMailer to use SMTP
-$mail->isSMTP();
+try {
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com'; // Gunakan SMTP dari layanan email kamu
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'haris.smta@gmail.com'; // Ganti dengan email kamu
+    $mail->Password   = 'Jameson88- '; // Ganti dengan password email kamu
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
 
-//Enable SMTP debugging
-//SMTP::DEBUG_OFF = off (for production use)
-//SMTP::DEBUG_CLIENT = client messages
-//SMTP::DEBUG_SERVER = client and server messages
-$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mail->setFrom('haris.smta@gmail.com', 'Haris Sasmitra');
+    $mail->addAddress('citra.thesociallinked@gmail.com', 'Citra');
 
-//Set the hostname of the mail server
-$mail->Host = 'smtp.gmail.com';
-//Use `$mail->Host = gethostbyname('smtp.gmail.com');`
-//if your network does not support SMTP over IPv6,
-//though this may cause issues with TLS
+    $mail->isHTML(true);
+    $mail->Subject = 'Test';
+    $mail->Body    = '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
+<!--[if gte mso 15]>
+<xml>
+<o:OfficeDocumentSettings>
+<o:AllowPNG/>
+<o:PixelsPerInch>96</o:PixelsPerInch>
+</o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>*|MC:SUBJECT|*</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<!--[if !mso]><!--><link rel="stylesheet" type="text/css" id="newGoogleFontsStatic" href="https://fonts.googleapis.com/css?family=Work+Sans:400,400i,700,700i,900,900i"/><!--<![endif]--><style>          img{-ms-interpolation-mode:bicubic;} 
+          table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} 
+          .mceStandardButton, .mceStandardButton td, .mceStandardButton td a{mso-hide:all !important;} 
+          p, a, li, td, blockquote{mso-line-height-rule:exactly;} 
+          p, a, li, td, body, table, blockquote{-ms-text-size-adjust:100%; -webkit-text-size-adjust:100%;} 
+          @media only screen and (max-width: 480px){
+            body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:none !important;} 
+          }
+          .mcnPreviewText{display: none !important;} 
+          .bodyCell{margin:0 auto; padding:0; width:100%;}
+          .ExternalClass, .ExternalClass p, .ExternalClass td, .ExternalClass div, .ExternalClass span, .ExternalClass font{line-height:100%;} 
+          .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} 
+          a[x-apple-data-detectors]{color:inherit !important; text-decoration:none !important; font-size:inherit !important; font-family:inherit !important; font-weight:inherit !important; line-height:inherit !important;} 
+            body{height:100%; margin:0; padding:0; width:100%; background: #ffffff;}
+            p{margin:0; padding:0;} 
+            table{border-collapse:collapse;} 
+            td, p, a{word-break:break-word;} 
+            h1, h2, h3, h4, h5, h6{display:block; margin:0; padding:0;} 
+            img, a img{border:0; height:auto; outline:none; text-decoration:none;} 
+            a[href^="tel"], a[href^="sms"]{color:inherit; cursor:default; text-decoration:none;} 
+            li p {margin: 0 !important;}
+            .ProseMirror a {
+                pointer-events: none;
+            }
+            @media only screen and (max-width: 640px){
+                .mceClusterLayout td{padding: 4px !important;} 
+            }
+            @media only screen and (max-width: 480px){
+                body{width:100% !important; min-width:100% !important; } 
+                body.mobile-native {
+                    -webkit-user-select: none; user-select: none; transition: transform 0.2s ease-in; transform-origin: top center;
+                }
+                body.mobile-native.selection-allowed a, body.mobile-native.selection-allowed .ProseMirror {
+                    user-select: auto;
+                    -webkit-user-select: auto;
+                }
+                colgroup{display: none;}
+                img{height: auto !important;}
+                .mceWidthContainer{max-width: 660px !important;}
+                .mceColumn{display: block !important; width: 100% !important;}
+                .mceColumn-forceSpan{display: table-cell !important; width: auto !important;}
+                .mceColumn-forceSpan .mceButton a{min-width:0 !important;}
+                .mceBlockContainer{padding-right:16px !important; padding-left:16px !important;} 
+                .mceTextBlockContainer{padding-right:16px !important; padding-left:16px !important;} 
+                .mceBlockContainerE2E{padding-right:0px; padding-left:0px;} 
+                .mceSpacing-24{padding-right:16px !important; padding-left:16px !important;}
+                .mceImage, .mceLogo{width: 100% !important; height: auto !important;} 
+                .mceFooterSection .mceText, .mceFooterSection .mceText p{font-size: 16px !important; line-height: 140% !important;}
+            }
+            div[contenteditable="true"] {outline: 0;}
+            .ProseMirror h1.empty-node:only-child::before,
+            .ProseMirror h2.empty-node:only-child::before,
+            .ProseMirror h3.empty-node:only-child::before,
+            .ProseMirror h4.empty-node:only-child::before {
+                content: 'Heading';
+            }
+            .ProseMirror p.empty-node:only-child::before, .ProseMirror:empty::before {
+                content: 'Start typing...';
+            }
+            .mceImageBorder {display: inline-block;}
+            .mceImageBorder img {border: 0 !important;}
+body, #bodyTable { background-color: rgb(240, 203, 195); }.mceText, .mcnTextContent, .mceLabel { font-family: "Work Sans", sans-serif; }.mceText, .mcnTextContent, .mceLabel { color: rgb(255, 255, 255); }.mceText h1 { margin-bottom: 0px; }.mceText p { margin-bottom: 0px; }.mceText label { margin-bottom: 0px; }.mceText input { margin-bottom: 0px; }.mceSpacing-24 .mceInput + .mceErrorMessage { margin-top: -12px; }.mceText h1 { margin-bottom: 0px; }.mceText p { margin-bottom: 0px; }.mceText label { margin-bottom: 0px; }.mceText input { margin-bottom: 0px; }.mceSpacing-12 .mceInput + .mceErrorMessage { margin-top: -6px; }.mceInput { background-color: transparent; border: 2px solid rgb(208, 208, 208); width: 60%; color: rgb(77, 77, 77); display: block; }.mceInput[type="radio"], .mceInput[type="checkbox"] { float: left; margin-right: 12px; display: inline; width: auto !important; }.mceLabel > .mceInput { margin-bottom: 0px; margin-top: 2px; }.mceLabel { display: block; }.mceText p, .mcnTextContent p { color: rgb(255, 255, 255); font-family: "Work Sans", sans-serif; font-size: 16px; font-weight: normal; line-height: 1.5; mso-line-height-alt: 150%; text-align: left; letter-spacing: 0px; direction: ltr; margin: 0px; }.mceText h1, .mcnTextContent h1 { color: rgb(255, 255, 255); font-family: "Work Sans", sans-serif; font-size: 31px; font-weight: bold; line-height: 1.5; mso-line-height-alt: 150%; text-align: left; letter-spacing: 0px; direction: ltr; }.mceSectionHeader .mceText h1, .mceSectionHeader .mcnTextContent h1 { }.mceSectionBody .mceText h1, .mceSectionBody .mcnTextContent h1 { }.mceSectionBody .mceText p, .mceSectionBody .mcnTextContent p { }.mceSectionFooter .mceText p, .mceSectionFooter .mcnTextContent p { }
+@media only screen and (max-width: 480px) {
+            .mceText p { margin: 0px; font-size: 16px !important; line-height: 1.5 !important; mso-line-height-alt: 150%; }
+          }
+@media only screen and (max-width: 480px) {
+            .mceText h1 { font-size: 31px !important; line-height: 1.5 !important; mso-line-height-alt: 150%; }
+          }
+@media only screen and (max-width: 480px) {
+            .bodyCell { padding-left: 16px !important; padding-right: 16px !important; }
+          }
+@media only screen and (max-width: 480px) {
+            .mceButtonContainer { width: fit-content !important; max-width: fit-content !important; }
+          }
+@media only screen and (max-width: 480px) {
+            .mceButtonLink { padding: 18px 28px !important; font-size: 16px !important; }
+          }
+#dataBlockId-16 p, #dataBlockId-16 h1, #dataBlockId-16 h2, #dataBlockId-16 h3, #dataBlockId-16 h4, #dataBlockId-16 ul { text-align: center; }</style></head>
+<body>
+<!--*|IF:MC_PREVIEW_TEXT|*-->
+<!--[if !gte mso 9]><!----><span class="mcnPreviewText" style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span><!--<![endif]-->
+<!--*|END:IF|*-->
+<div style="display: none; max-height: 0px; overflow: hidden;">͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌      ͏ ‌    ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­</div><!--MCE_TRACKING_PIXEL-->
+<center>
+<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="background-color: rgb(240, 203, 195);">
+<tbody><tr>
+<td class="bodyCell" align="center" valign="top">
+<table id="root" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody data-block-id="5" class="mceWrapper"><tr><td style="background-color:#ffffff" valign="top" align="center" class="mceSectionHeader"><!--[if (gte mso 9)|(IE)]><table align="center" border="0" cellspacing="0" cellpadding="0" width="660" style="width:660px;"><tr><td><![endif]--><table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:660px" role="presentation"><tbody><tr><td style="background-color:#000000" valign="top" class="mceWrapperInner"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="4"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="-18" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="background-color:#000000" valign="top" id="blockContainerId-2"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="2"><tbody><tr><td valign="top" class="mceSpacerBlock" height="20"></td></tr></tbody></table></td></tr><tr><td style="background-color:#000000;padding-top:12px;padding-bottom:12px;padding-right:48px;padding-left:48px" valign="top" class="mceImageBlockContainer" align="center" id="blockContainerId-3"><a href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong" style="display:block" data-block-id="3"><span class="mceImageBorder" style="border:0;border-radius:0;vertical-align:top;margin:0"><img width="135.35999999999999" height="auto" style="width:135.35999999999999px;height:auto;max-width:135.35999999999999px !important;border-radius:0;display:block" alt="Logo" src="https://mcusercontent.com/4b1f0f615829d78eba73cd0e8/images/53d08ad9-7c54-9ef8-7ed0-bc09dc80ba46.png" class="mceLogo"/></span></a></td></tr><tr><td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0" valign="top" id="blockContainerId-37"><table width="100%" style="border:0;border-radius:0;border-collapse:separate"><tbody><tr><td style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px" class="mceTextBlockContainer"><div data-block-id="37" class="mceText" id="dataBlockId-37" style="width:100%"><h1 style="text-align: center;" class="last-child"><span style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif">GROW YOUR BUSINESS WITH US!</span></h1></div></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]--></td></tr></tbody><tbody data-block-id="14" class="mceWrapper"><tr><td style="background-color:#ffffff" valign="top" align="center" class="mceSectionBody"><!--[if (gte mso 9)|(IE)]><table align="center" border="0" cellspacing="0" cellpadding="0" width="660" style="width:660px;"><tr><td><![endif]--><table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:660px" role="presentation"><tbody><tr><td style="background-color:#000000" valign="top" class="mceWrapperInner"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="13"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="-19" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="background-color:#000000" valign="top" id="blockContainerId-6"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="6"><tbody><tr><td valign="top" class="mceSpacerBlock" height="20"></td></tr></tbody></table></td></tr><tr><td valign="top" class="mceGutterContainer" id="gutterContainerId-22"><table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:separate" role="presentation"><tbody><tr><td style="background-color:#000000;padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceLayoutContainer" id="blockContainerId-22"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="22" id="section_d00b5d73aea58374ea604024b95eee55" class="mceLayout"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-21" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" align="center" id="blockContainerId--8"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="-8"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-26" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" id="blockContainerId-27"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="27"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="24" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="24" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0" valign="top" id="blockContainerId-28"><table width="100%" style="border:0;border-radius:0;border-collapse:separate"><tbody><tr><td style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px" class="mceTextBlockContainer"><div data-block-id="28" class="mceText" id="dataBlockId-28" style="width:100%"><p class="last-child">TheSocialLinked adalah agensi digital marketing yang menghubungkan merek dengan audiens melalui strategi media sosial kreatif dan efektif. Menggabungkan antara <strong>Social Media, dan E-commerce</strong>, kami telah membantu ratusan brand untuk meningkatkan omzet.</p></div></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:24px;padding-left:24px" valign="top" class="mceButtonBlockContainer" align="center" id="blockContainerId-49"><div><!--[if !mso]><!--></div><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" data-block-id="49" class="mceButtonContainer"><tbody><tr class="mceStandardButton"><td style="background-color:#999999;border-radius:8px;text-align:center" valign="top" class="mceButton"><a href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong" target="_blank" class="mceButtonLink" style="background-color:#999999;border-radius:8px;border:2px solid #1c2f34;color:#ffffff;display:block;font-family:'Work Sans', sans-serif;font-size:16px;font-weight:normal;font-style:normal;padding:16px 28px;text-decoration:none;min-width:30px;text-align:center;direction:ltr;letter-spacing:0px" rel="noreferrer">KONSULTASI DI SINI</a></td></tr></tbody></table><div><!--<![endif]--></div><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" data-block-id="49" class="mceButtonContainer"><tbody><tr>
+<!--[if mso]>
+<td align="center">
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong"
+style="v-text-anchor:middle; width:215.01px; height:54.5px;"
+arcsize="4%"
+strokecolor="#1c2f34"
+strokeweight="2px"
+fillcolor="#999999">
+<v:stroke dashstyle="solid"/>
+<w:anchorlock />
+<center style="
+color: #ffffff;
+display: block;
+font-family: 'Work Sans', sans-serif;
+font-size: 16;
+font-style: normal;
+font-weight: normal;
+letter-spacing: 0px;
+text-decoration: none;
+text-align: center;
+direction: ltr;"
+>
+KONSULTASI DI SINI
+</center>
+</v:roundrect>
+</td>
+<![endif]-->
+</tr></tbody></table></td></tr><tr><td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0" valign="top" id="blockContainerId-56"><table width="100%" style="border:0;border-radius:0;border-collapse:separate"><tbody><tr><td style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px" class="mceTextBlockContainer"><div data-block-id="56" class="mceText" id="dataBlockId-56" style="width:100%"><h1 style="text-align: center;" class="last-child">Our Services</h1></div></td></tr></tbody></table></td></tr><tr><td valign="top" class="mceGutterContainer" id="gutterContainerId-68"><table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:separate" role="presentation"><tbody><tr><td style="padding-top:8px;padding-bottom:8px;padding-right:0;padding-left:0" valign="top" class="mceLayoutContainer" id="blockContainerId-68"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="68" id="section_f4d8be1ea126514ddb99727787ccf335" class="mceLayout"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-24" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" align="center" id="blockContainerId--17"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="-17"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-29" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" id="blockContainerId-67"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="67"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="24" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="66" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0" valign="top" id="blockContainerId-57"><table width="100%" style="border:0;border-radius:0;border-collapse:separate"><tbody><tr><td style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px" class="mceTextBlockContainer"><div data-block-id="57" class="mceText" id="dataBlockId-57" style="width:100%"><p class="last-child"><strong>The Social Linked menyediakan solusi pemasaran digital yang disesuaikan, termasuk manajemen media sosial, pembuatan konten, iklan berbayar, pemasaran influencer, optimalisasi e-commerce, SEO, branding, dan analitik untuk membantu brand meningkatkan kehadiran online dan konversi.</strong></p></div></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td valign="top" class="mceGutterContainer" id="gutterContainerId-29"><table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:separate" role="presentation"><tbody><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceLayoutContainer" id="blockContainerId-29"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="29" id="section_6a896544abf4bb8ad7d94ed752070e6a" class="mceLayout"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-22" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" align="center" id="blockContainerId--10"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="-10"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-27" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" id="blockContainerId-36"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="36"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover;padding-top:0px;padding-bottom:0px" valign="top"><table border="0" cellpadding="0" cellspacing="24" width="100%" style="table-layout:fixed" role="presentation"><colgroup><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/><col span="1" width="8.333333333333332%"/></colgroup><tbody><tr><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="31" colspan="4" width="33.33333333333333%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceImageBlockContainer" align="center" id="blockContainerId-53"><a href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong" style="display:block" target="_blank" data-block-id="53"><span class="mceImageBorder" style="border:0;border-radius:0;vertical-align:top;margin:0"><img width="187.00000000000003" height="auto" style="width:187.00000000000003px;height:auto;max-width:187.00000000000003px !important;border-radius:0;display:block" alt="" src="https://mcusercontent.com/4b1f0f615829d78eba73cd0e8/images/3c8761a8-9a5b-68eb-6932-176d503f7559.png" role="presentation" class="imageDropZone mceImage"/></span></a></td></tr></tbody></table></td><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="33" colspan="4" width="33.33333333333333%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceImageBlockContainer" align="center" id="blockContainerId-54"><a href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong" style="display:block" target="_blank" data-block-id="54"><span class="mceImageBorder" style="border:0;border-radius:0;vertical-align:top;margin:0"><img width="187.00000000000003" height="auto" style="width:187.00000000000003px;height:auto;max-width:187.00000000000003px !important;border-radius:0;display:block" alt="" src="https://mcusercontent.com/4b1f0f615829d78eba73cd0e8/images/48b77b90-f858-d532-1682-7fb1497d8e6f.png" role="presentation" class="imageDropZone mceImage"/></span></a></td></tr></tbody></table></td><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="35" colspan="4" width="33.33333333333333%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceImageBlockContainer" align="center" id="blockContainerId-55"><a href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong" style="display:block" target="_blank" data-block-id="55"><span class="mceImageBorder" style="border:0;border-radius:0;vertical-align:top;margin:0"><img width="187.00000000000003" height="auto" style="width:187.00000000000003px;height:auto;max-width:187.00000000000003px !important;border-radius:0;display:block" alt="" src="https://mcusercontent.com/4b1f0f615829d78eba73cd0e8/images/a1d6b905-6e9a-7805-be5d-616ad5d87457.png" role="presentation" class="imageDropZone mceImage"/></span></a></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:24px;padding-left:24px" valign="top" class="mceButtonBlockContainer" align="center" id="blockContainerId-64"><div><!--[if !mso]><!--></div><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" data-block-id="64" class="mceButtonContainer"><tbody><tr class="mceStandardButton"><td style="background-color:#999999;border-radius:8px;text-align:center" valign="top" class="mceButton"><a href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong" target="_blank" class="mceButtonLink" style="background-color:#999999;border-radius:8px;border:2px solid #1c2f34;color:#ffffff;display:block;font-family:'Work Sans', sans-serif;font-size:16px;font-weight:normal;font-style:normal;padding:16px 28px;text-decoration:none;min-width:30px;text-align:center;direction:ltr;letter-spacing:0px" rel="noreferrer">KONSULTASIKAN SEKARANG</a></td></tr></tbody></table><div><!--<![endif]--></div><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" data-block-id="64" class="mceButtonContainer"><tbody><tr>
+<!--[if mso]>
+<td align="center">
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong"
+style="v-text-anchor:middle; width:285.26px; height:54.5px;"
+arcsize="3%"
+strokecolor="#1c2f34"
+strokeweight="2px"
+fillcolor="#999999">
+<v:stroke dashstyle="solid"/>
+<w:anchorlock />
+<center style="
+color: #ffffff;
+display: block;
+font-family: 'Work Sans', sans-serif;
+font-size: 16;
+font-style: normal;
+font-weight: normal;
+letter-spacing: 0px;
+text-decoration: none;
+text-align: center;
+direction: ltr;"
+>
+KONSULTASIKAN SEKARANG
+</center>
+</v:roundrect>
+</td>
+<![endif]-->
+</tr></tbody></table></td></tr><tr><td valign="top" class="mceGutterContainer" id="gutterContainerId-58"><table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:separate" role="presentation"><tbody><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceLayoutContainer" id="blockContainerId-58"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="58" id="section_4f2e7bcefa1bdc79ba41b02a1f839bbf" class="mceLayout"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-23" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" align="center" id="blockContainerId--15"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="-15"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-28" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" id="blockContainerId-61"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="61"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="24" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="60" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0" valign="top" id="blockContainerId-62"><table width="100%" style="border:0;border-radius:0;border-collapse:separate"><tbody><tr><td style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px" class="mceTextBlockContainer"><div data-block-id="62" class="mceText" id="dataBlockId-62" style="width:100%"><h1 style="text-align: center;" class="last-child">Our Packages</h1></div></td></tr></tbody></table></td></tr><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceImageBlockContainer" align="center" id="blockContainerId-63"><a href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong" style="display:block" target="_blank" data-block-id="63"><span class="mceImageBorder" style="border:0;border-radius:0;vertical-align:top;margin:0"><img width="561" height="auto" style="width:561px;height:auto;max-width:561px !important;border-radius:0;display:block" alt="" src="https://mcusercontent.com/4b1f0f615829d78eba73cd0e8/images/1a33612c-dcf7-6113-a712-9d5e8105c12b.png" role="presentation" class="imageDropZone mceImage"/></span></a></td></tr><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:24px;padding-left:24px" valign="top" class="mceButtonBlockContainer" align="center" id="blockContainerId-69"><div><!--[if !mso]><!--></div><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" data-block-id="69" class="mceButtonContainer"><tbody><tr class="mceStandardButton"><td style="background-color:#999999;border-radius:8px;text-align:center" valign="top" class="mceButton"><a href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong" target="_blank" class="mceButtonLink" style="background-color:#999999;border-radius:8px;border:2px solid #1c2f34;color:#ffffff;display:block;font-family:'Work Sans', sans-serif;font-size:16px;font-weight:normal;font-style:normal;padding:16px 28px;text-decoration:none;min-width:30px;text-align:center;direction:ltr;letter-spacing:0px" rel="noreferrer">PERTANYAAN LAIN</a></td></tr></tbody></table><div><!--<![endif]--></div><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" data-block-id="69" class="mceButtonContainer"><tbody><tr>
+<!--[if mso]>
+<td align="center">
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+href="https://wa.me/6285810744989?text=Halo%20kak%2C%20aku%20mau%20konsultasi%20bisnis%20dong"
+style="v-text-anchor:middle; width:205.84px; height:54.5px;"
+arcsize="4%"
+strokecolor="#1c2f34"
+strokeweight="2px"
+fillcolor="#999999">
+<v:stroke dashstyle="solid"/>
+<w:anchorlock />
+<center style="
+color: #ffffff;
+display: block;
+font-family: 'Work Sans', sans-serif;
+font-size: 16;
+font-style: normal;
+font-weight: normal;
+letter-spacing: 0px;
+text-decoration: none;
+text-align: center;
+direction: ltr;"
+>
+PERTANYAAN LAIN
+</center>
+</v:roundrect>
+</td>
+<![endif]-->
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0" valign="top" id="blockContainerId-7"><table width="100%" style="border:0;border-radius:0;border-collapse:separate"><tbody><tr><td style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px" class="mceTextBlockContainer"><div data-block-id="7" class="mceText" id="dataBlockId-7" style="width:100%"><h1 style="text-align: center;" class="last-child">Ayo bergabung bersama kami!</h1></div></td></tr></tbody></table></td></tr><tr><td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0" valign="top" id="blockContainerId-9"><table width="100%" style="border:0;border-radius:0;border-collapse:separate"><tbody><tr><td style="padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px" class="mceTextBlockContainer"><div data-block-id="9" class="mceText" id="dataBlockId-9" style="width:100%"><p style="text-align: center;" class="last-child">Informasi Lebih Lanjut</p></div></td></tr></tbody></table></td></tr><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceLayoutContainer" id="blockContainerId-52"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="52"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="24" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-13" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceSocialFollowBlockContainer" id="blockContainerId--12"><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" class="mceSocialFollowBlock" data-block-id="-12"><tbody><tr><td valign="middle" align="center"><!--[if mso]><table align="left" border="0" cellspacing= "0" cellpadding="0"><tr><![endif]--><!--[if mso]><td align="center" valign="top"><![endif]--><table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;float:left" role="presentation"><tbody><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="top" class="mceSocialFollowIcon" align="center"><a href="https://www.instagram.com/thesociallinked/" target="_blank" rel="noreferrer"><img class="mceSocialFollowImage" width="40" height="40" alt="Instagram icon" src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/instagram-filled-light-40.png"/></a></td></tr><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="middle" class="mceSocialFollowText" align="center"><a style="font-weight:normal;font-style:normal;text-decoration:underline;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color:#ffffff;font-size:16px" title="Instagram" href="https://www.instagram.com/thesociallinked/">Instagram</a></td></tr></tbody></table><!--[if mso]></td><![endif]--><!--[if mso]><td align="center" valign="top"><![endif]--><table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;float:left" role="presentation"><tbody><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="top" class="mceSocialFollowIcon" align="center"><a href="mailto:zifathesociallinked@gmail.com" target="_blank" rel="noreferrer"><img class="mceSocialFollowImage" width="40" height="40" alt="Email icon" src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/email-filled-light-40.png"/></a></td></tr><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="middle" class="mceSocialFollowText" align="center"><a style="font-weight:normal;font-style:normal;text-decoration:underline;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color:#ffffff;font-size:16px" title="Email" href="mailto:zifathesociallinked@gmail.com">Email</a></td></tr></tbody></table><!--[if mso]></td><![endif]--><!--[if mso]><td align="center" valign="top"><![endif]--><table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;float:left" role="presentation"><tbody><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="top" class="mceSocialFollowIcon" align="center"><a href="https://drive.google.com/drive/folders/1UbA5ZEDo119inwm3aTyWEV7DdOiJK8Je" target="_blank" rel="noreferrer"><img class="mceSocialFollowImage" width="40" height="40" alt="Website icon" src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/website-filled-light-40.png"/></a></td></tr><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="middle" class="mceSocialFollowText" align="center"><a style="font-weight:normal;font-style:normal;text-decoration:underline;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color:#ffffff;font-size:16px" title="Portfolio" href="https://drive.google.com/drive/folders/1UbA5ZEDo119inwm3aTyWEV7DdOiJK8Je">Portfolio</a></td></tr></tbody></table><!--[if mso]></td><![endif]--><!--[if mso]></tr></table><![endif]--></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td style="background-color:transparent" valign="top" id="blockContainerId-11"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="11"><tbody><tr><td valign="top" class="mceSpacerBlock" height="20"></td></tr></tbody></table></td></tr><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceLayoutContainer" id="blockContainerId-12"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="12"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="24" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-6" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceSocialFollowBlockContainer" id="blockContainerId--5"><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" class="mceSocialFollowBlock" data-block-id="-5"><tbody><tr><td valign="middle" align="center"><!--[if mso]><table align="left" border="0" cellspacing= "0" cellpadding="0"><tr><![endif]--><!--[if mso]><td align="center" valign="top"><![endif]--><table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;float:left" role="presentation"><tbody><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="top" class="mceSocialFollowIcon" align="center" width="40"><a href="https://facebook.com/" target="_blank" rel="noreferrer"><img class="mceSocialFollowImage" width="40" height="40" alt="Facebook icon" src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/facebook-filled-dark-40.png"/></a></td></tr></tbody></table><!--[if mso]></td><![endif]--><!--[if mso]><td align="center" valign="top"><![endif]--><table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;float:left" role="presentation"><tbody><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="top" class="mceSocialFollowIcon" align="center" width="40"><a href="https://instagram.com/" target="_blank" rel="noreferrer"><img class="mceSocialFollowImage" width="40" height="40" alt="Instagram icon" src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/instagram-filled-dark-40.png"/></a></td></tr></tbody></table><!--[if mso]></td><![endif]--><!--[if mso]><td align="center" valign="top"><![endif]--><table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;float:left" role="presentation"><tbody><tr><td style="padding-top:3px;padding-bottom:3px;padding-left:12px;padding-right:12px" valign="top" class="mceSocialFollowIcon" align="center" width="40"><a href="https://x.com/" target="_blank" rel="noreferrer"><img class="mceSocialFollowImage" width="40" height="40" alt="Twitter icon" src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/twitter-filled-dark-40.png"/></a></td></tr></tbody></table><!--[if mso]></td><![endif]--><!--[if mso]></tr></table><![endif]--></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]--></td></tr></tbody><tbody data-block-id="20" class="mceWrapper"><tr><td style="background-color:#ffffff" valign="top" align="center" class="mceSectionFooter"><!--[if (gte mso 9)|(IE)]><table align="center" border="0" cellspacing="0" cellpadding="0" width="660" style="width:660px;"><tr><td><![endif]--><table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:660px" role="presentation"><tbody><tr><td style="background-color:#dfa599" valign="top" class="mceWrapperInner"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="19"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="-20" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="background-color:#000000;padding-top:8px;padding-bottom:8px;padding-right:8px;padding-left:8px" valign="top" id="blockContainerId-18"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="18" id="section_27b21082fb141e707c95b76dd63966d9" class="mceFooterSection"><tbody><tr class="mceRow"><td style="background-color:#000000;background-position:center;background-repeat:no-repeat;background-size:cover;padding-top:0px;padding-bottom:0px" valign="top"><table border="0" cellpadding="0" cellspacing="12" width="100%" role="presentation"><tbody><tr><td style="padding-top:0;padding-bottom:0" valign="top" class="mceColumn" data-block-id="-3" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td style="padding-top:12px;padding-bottom:12px;padding-right:0;padding-left:0" valign="top" class="mceImageBlockContainer" align="center" id="blockContainerId-15"><span class="mceImageBorder" style="border:0;border-radius:0;vertical-align:top;margin:0"><img data-block-id="15" width="110" height="auto" style="width:110px;height:auto;max-width:110px !important;border-radius:0;display:block" alt="Logo" src="https://mcusercontent.com/4b1f0f615829d78eba73cd0e8/images/53d08ad9-7c54-9ef8-7ed0-bc09dc80ba46.png" class="mceLogo"/></span></td></tr><tr><td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0" valign="top" align="center" id="blockContainerId-16"><table width="100%" style="border:0;border-radius:0;border-collapse:separate"><tbody><tr><td style="padding-left:16px;padding-right:16px;padding-top:12px;padding-bottom:12px" class="mceTextBlockContainer"><div data-block-id="16" class="mceText" id="dataBlockId-16" style="display:inline-block;width:100%"><p class="last-child"><em><span style="font-size: 12px">Copyright (C) 2025 The Social Linked. All rights reserved.</span></em><br/></p></div></td></tr></tbody></table></td></tr><tr><td valign="top" class="mceLayoutContainer" align="center" id="blockContainerId--2"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="-2"><tbody><tr class="mceRow"><td style="background-position:center;background-repeat:no-repeat;background-size:cover" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" class="mceColumn" data-block-id="-25" colspan="12" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation"><tbody><tr><td valign="top" align="center" id="blockContainerId-17"><div><div data-block-id="17"><a href="http://eepurl.com/i9SdCs" target="_blank" rel="noopener noreferrer"><img style="max-width:100%" width="137" height="53" alt="Email Marketing Powered by Mailchimp" title="Mailchimp Email Marketing" src="https://cdn-images.mailchimp.com/monkey_rewards/intuit-mc-rewards-2.png"/></a></div></div></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]--></td></tr></tbody></table>
+</td>
+</tr>
+</tbody></table>
+</center>
+            <center>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" id="canspamBarWrapper" style="background-color:#FFFFFF; border-top:1px solid #E5E5E5;">
+                    <tr>
+                        <td align="center" valign="top" style="padding-top:20px; padding-bottom:20px;">
+                            <table border="0" cellpadding="0" cellspacing="0" id="canspamBar">
+                                <tr>
+                                    <td align="center" valign="top" style="color:#606060; font-family:Helvetica, Arial, sans-serif; font-size:11px; line-height:150%; padding-right:20px; padding-bottom:5px; padding-left:20px; text-align:center;">
+                                        This email was sent to <a href="mailto:*|EMAIL|*" target="_blank" style="color:#404040 !important;">*|EMAIL|*</a>
+                                        <br/>
+                                        <a href="*|ABOUT_LIST|*" target="_blank" style="color:#404040 !important;"><em>why did I get this?</em></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="*|UNSUB|*" style="color:#404040 !important;">unsubscribe from this list</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="*|UPDATE_PROFILE|*" style="color:#404040 !important;">update subscription preferences</a>
+                                        <br/>
+                                        *|LIST:ADDRESSLINE|*
+                                        <br/>
+                                        <br/>
+                                        *|REWARDS|*
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <style type="text/css">
+                    @media only screen and (max-width: 480px){
+                        table#canspamBar td{font-size:14px !important;}
+                        table#canspamBar td a{display:block !important; margin-top:10px !important;}
+                    }
+                </style>
+            </center></body></html>';
+    $mail->AltBody = ' ';
 
-//Set the SMTP port number:
-// - 465 for SMTP with implicit TLS, a.k.a. RFC8314 SMTPS or
-// - 587 for SMTP+STARTTLS
-$mail->Port = 465;
-
-//Set the encryption mechanism to use:
-// - SMTPS (implicit TLS on port 465) or
-// - STARTTLS (explicit TLS on port 587)
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-
-//Whether to use SMTP authentication
-$mail->SMTPAuth = true;
-
-//Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = 'username@gmail.com';
-
-//Password to use for SMTP authentication
-$mail->Password = 'yourpassword';
-
-//Set who the message is to be sent from
-//Note that with gmail you can only use your account address (same as `Username`)
-//or predefined aliases that you have configured within your account.
-//Do not use user-submitted addresses in here
-$mail->setFrom('from@example.com', 'First Last');
-
-//Set an alternative reply-to address
-//This is a good place to put user-submitted addresses
-$mail->addReplyTo('replyto@example.com', 'First Last');
-
-//Set who the message is to be sent to
-$mail->addAddress('whoto@example.com', 'John Doe');
-
-//Set the subject line
-$mail->Subject = 'PHPMailer GMail SMTP test';
-
-//Read an HTML message body from an external file, convert referenced images to embedded,
-//convert HTML into a basic plain-text alternative body
-$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
-
-//Replace the plain text body with one created manually
-$mail->AltBody = 'This is a plain-text message body';
-
-//Attach an image file
-$mail->addAttachment('images/phpmailer_mini.png');
-
-//send the message, check for errors
-if (!$mail->send()) {
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message sent!';
-    //Section 2: IMAP
-    //Uncomment these to save your message in the 'Sent Mail' folder.
-    #if (save_mail($mail)) {
-    #    echo "Message saved!";
-    #}
+    $mail->send();
+    echo 'Email berhasil dikirim!';
+} catch (Exception $e) {
+    echo "Email gagal dikirim: {$mail->ErrorInfo}";
 }
+?>
 
-//Section 2: IMAP
-//IMAP commands requires the PHP IMAP Extension, found at: https://php.net/manual/en/imap.setup.php
-//Function to call which uses the PHP imap_*() functions to save messages: https://php.net/manual/en/book.imap.php
-//You can use imap_getmailboxes($imapStream, '/imap/ssl', '*' ) to get a list of available folders or labels, this can
-//be useful if you are trying to get this working on a non-Gmail IMAP server.
-function save_mail($mail)
-{
-    //You can change 'Sent Mail' to any other folder or tag
-    $path = '{imap.gmail.com:993/imap/ssl}[Gmail]/Sent Mail';
-
-    //Tell your server to open an IMAP connection using the same username and password as you used for SMTP
-    $imapStream = imap_open($path, $mail->Username, $mail->Password);
-
-    $result = imap_append($imapStream, $path, $mail->getSentMIMEMessage());
-    imap_close($imapStream);
-
-    return $result;
-}
